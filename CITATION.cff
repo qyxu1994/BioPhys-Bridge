@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use Biophys-Bridge, please cite this dataset."
+title: "Biophys-Bridge: A Physics-Grounded Sci-Evo Dataset for Biological Mechanism Reasoning"
+type: dataset
+authors:
+  - family-names: "Xu"
+    given-names: "Qingyang"
+repository-code: "https://github.com/qyxu1994/Biophys-Bridge"
+license: "CC-BY-4.0"
+version: "1.0.0"
+date-released: "2026-05-31"
+keywords:
+  - "AI for Science"
+  - "biophysics"
+  - "scientific reasoning"
+  - "Sci-Evo"
+  - "dataset"

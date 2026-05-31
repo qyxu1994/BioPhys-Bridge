@@ -1,0 +1,16 @@
+Biophys-Bridge Dataset License
+
+The curated Biophys-Bridge / Sci-Evo dataset files under data/release/
+and the dataset documentation under reports/ are released under the Creative
+Commons Attribution 4.0 International License (CC-BY-4.0).
+
+SPDX-License-Identifier: CC-BY-4.0
+License text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+This data license covers the curated JSONL records, schema-derived dataset
+metadata, dataset cards, and reports. It does not relicense upstream source
+papers, raw PDFs, or MinerU intermediate artifacts. Each case preserves the
+upstream paper license in source.license.
+
+The repository code remains licensed separately under the MIT License in
+LICENSE.

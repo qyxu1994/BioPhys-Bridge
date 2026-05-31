@@ -1,0 +1,30 @@
+{
+  "domain_scores": {
+    "biomolecular_phase_separation": 0.11368550881777487,
+    "conformational_dynamics_allostery": 0.11462254685767737,
+    "enzyme_kinetics": 0.11983537570296604,
+    "protein_ligand_binding": 0.11614424495380471,
+    "protein_stability_thermodynamics": 0.11970394251104974,
+    "systems_biology_dynamics": 0.1087001511942402
+  },
+  "evaluated_this_run": 1517,
+  "mean_answer_token_f1": 0.0703041054700424,
+  "mean_evidence_id_f1": 0.21615814420692472,
+  "mean_overall_score": 0.11406031709110709,
+  "model": "lexical_retrieval_baseline",
+  "n_tasks": 1517,
+  "provider": "lexical",
+  "schema_errors": 0,
+  "task_type_counts": {
+    "derivation": 355,
+    "discrepancy_explanation": 279,
+    "mechanism_from_evidence": 480,
+    "next_experiment_design": 403
+  },
+  "task_type_scores": {
+    "derivation": 0.1494635812739343,
+    "discrepancy_explanation": 0.09929217425950901,
+    "mechanism_from_evidence": 0.12484540173892471,
+    "next_experiment_design": 0.08025215935949354
+  }
+}

@@ -1,0 +1,994 @@
+{
+  "$defs": {
+    "AgentTask": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_tools": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Tools",
+          "type": "array"
+        },
+        "gold_answer": {
+          "title": "Gold Answer",
+          "type": "string"
+        },
+        "input": {
+          "title": "Input",
+          "type": "string"
+        },
+        "required_reasoning_skills": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Reasoning Skills",
+          "type": "array"
+        },
+        "supporting_evidence_ids": {
+          "description": "Evidence IDs that ground the gold_answer.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Evidence Ids",
+          "type": "array"
+        },
+        "task_type": {
+          "title": "Task Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_type",
+        "input",
+        "gold_answer"
+      ],
+      "title": "AgentTask",
+      "type": "object"
+    },
+    "BiologicalMechanism": {
+      "additionalProperties": false,
+      "description": "Physical-to-biological bridge: what mechanism does the physics imply?",
+      "properties": {
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "mechanism_type": {
+          "minLength": 1,
+          "title": "Mechanism Type",
+          "type": "string"
+        },
+        "mutation_or_ligand_effect": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mutation Or Ligand Effect"
+        },
+        "structure_function_link": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Structure Function Link"
+        }
+      },
+      "required": [
+        "mechanism_type",
+        "description"
+      ],
+      "title": "BiologicalMechanism",
+      "type": "object"
+    },
+    "BiophysicalModel": {
+      "additionalProperties": false,
+      "description": "Physical/biophysical model behind the quantitative observation.\n\nMirrors revision-v2.md \"physical_model\" block. The wrapper class name stays\n`BiophysicalModel` for backward compatibility, but the sub-fields follow\nthe revision wording (`assumptions`, `validity_conditions`).",
+      "properties": {
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "equation_latex": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Equation Latex"
+        },
+        "model_family": {
+          "enum": [
+            "binding_thermodynamics",
+            "enzyme_reaction_kinetics",
+            "folding_stability_thermodynamics",
+            "conformational_allostery_energy_landscape",
+            "polymer_phase_separation_statistical_mechanics",
+            "systems_stochastic_dynamics",
+            "mechanical_force_response",
+            "spatial_transport_electrostatics",
+            "evolutionary_fitness_landscape"
+          ],
+          "title": "Model Family",
+          "type": "string"
+        },
+        "model_name": {
+          "minLength": 1,
+          "title": "Model Name",
+          "type": "string"
+        },
+        "secondary_model_families": {
+          "items": {
+            "enum": [
+              "binding_thermodynamics",
+              "enzyme_reaction_kinetics",
+              "folding_stability_thermodynamics",
+              "conformational_allostery_energy_landscape",
+              "polymer_phase_separation_statistical_mechanics",
+              "systems_stochastic_dynamics",
+              "mechanical_force_response",
+              "spatial_transport_electrostatics",
+              "evolutionary_fitness_landscape"
+            ],
+            "type": "string"
+          },
+          "title": "Secondary Model Families",
+          "type": "array"
+        },
+        "validity_conditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validity Conditions",
+          "type": "array"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Variables",
+          "type": "object"
+        }
+      },
+      "required": [
+        "model_name",
+        "model_family"
+      ],
+      "title": "BiophysicalModel",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "mineru_artifact_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mineru Artifact Path"
+        },
+        "modality": {
+          "enum": [
+            "text",
+            "table",
+            "formula",
+            "figure",
+            "caption",
+            "other"
+          ],
+          "title": "Modality",
+          "type": "string"
+        },
+        "source_location": {
+          "$ref": "#/$defs/SourceLocation"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "modality"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "ExpertAnnotation": {
+      "additionalProperties": false,
+      "description": "Optional curator-supplied reasoning, separate from auto-extraction.",
+      "properties": {
+        "biological_reasoning": {
+          "minLength": 1,
+          "title": "Biological Reasoning",
+          "type": "string"
+        },
+        "physics_reasoning": {
+          "minLength": 1,
+          "title": "Physics Reasoning",
+          "type": "string"
+        },
+        "reviewer_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Notes"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uncertainty"
+        }
+      },
+      "required": [
+        "physics_reasoning",
+        "biological_reasoning"
+      ],
+      "title": "ExpertAnnotation",
+      "type": "object"
+    },
+    "FailureOrRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "inferred_from_discussion": {
+          "default": false,
+          "title": "Inferred From Discussion",
+          "type": "boolean"
+        },
+        "present": {
+          "title": "Present",
+          "type": "boolean"
+        },
+        "revision_decision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision Decision"
+        }
+      },
+      "required": [
+        "present"
+      ],
+      "title": "FailureOrRevision",
+      "type": "object"
+    },
+    "Method": {
+      "additionalProperties": false,
+      "properties": {
+        "method_name": {
+          "title": "Method Name",
+          "type": "string"
+        },
+        "method_type": {
+          "enum": [
+            "wet_lab",
+            "computational",
+            "structural",
+            "in_silico",
+            "other"
+          ],
+          "title": "Method Type",
+          "type": "string"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        }
+      },
+      "required": [
+        "method_type",
+        "method_name"
+      ],
+      "title": "Method",
+      "type": "object"
+    },
+    "PhysicalInterpretation": {
+      "additionalProperties": false,
+      "description": "Quantitative-to-physical bridge: what does the number mean?",
+      "properties": {
+        "caveats": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveats",
+          "type": "array"
+        },
+        "consistency_check": {
+          "minLength": 1,
+          "title": "Consistency Check",
+          "type": "string"
+        },
+        "derived_quantity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Derived Quantity"
+        },
+        "directionality": {
+          "minLength": 1,
+          "title": "Directionality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "directionality",
+        "consistency_check"
+      ],
+      "title": "PhysicalInterpretation",
+      "type": "object"
+    },
+    "Quality": {
+      "additionalProperties": false,
+      "properties": {
+        "has_mineru_artifact": {
+          "default": false,
+          "title": "Has Mineru Artifact",
+          "type": "boolean"
+        },
+        "has_quantitative_evidence": {
+          "default": false,
+          "title": "Has Quantitative Evidence",
+          "type": "boolean"
+        },
+        "has_source_trace": {
+          "default": false,
+          "title": "Has Source Trace",
+          "type": "boolean"
+        },
+        "manual_review_status": {
+          "default": "unreviewed",
+          "enum": [
+            "unreviewed",
+            "reviewed",
+            "needs_fix",
+            "exclude"
+          ],
+          "title": "Manual Review Status",
+          "type": "string"
+        },
+        "reviewer_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Notes"
+        },
+        "schema_valid": {
+          "default": true,
+          "title": "Schema Valid",
+          "type": "boolean"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        }
+      },
+      "title": "Quality",
+      "type": "object"
+    },
+    "QuantitativeEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "evidence_id": {
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        },
+        "normalized_unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Unit"
+        },
+        "normalized_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Value"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "metric",
+        "value",
+        "unit",
+        "evidence_id"
+      ],
+      "title": "QuantitativeEvidence",
+      "type": "object"
+    },
+    "SciEvoStep": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "input_evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Evidence Ids",
+          "type": "array"
+        },
+        "output": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output"
+        },
+        "reasoning": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoning"
+        },
+        "stage": {
+          "enum": [
+            "research_question",
+            "hypothesis",
+            "method_design",
+            "quantitative_observation",
+            "biophysical_interpretation",
+            "failure_or_revision",
+            "next_step"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step_id",
+        "stage",
+        "description"
+      ],
+      "title": "SciEvoStep",
+      "type": "object"
+    },
+    "ScientificObject": {
+      "additionalProperties": false,
+      "properties": {
+        "enzyme_ec_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Enzyme Ec Number"
+        },
+        "ligand_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ligand Name"
+        },
+        "ligand_smiles": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ligand Smiles"
+        },
+        "mutation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mutation"
+        },
+        "pdb_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pdb Ids",
+          "type": "array"
+        },
+        "protein_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Protein Name"
+        },
+        "uniprot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uniprot Id"
+        }
+      },
+      "title": "ScientificObject",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "doi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Doi"
+        },
+        "evidence_completeness": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Completeness"
+        },
+        "license": {
+          "description": "Required license string (e.g., CC-BY-4.0).",
+          "title": "License",
+          "type": "string"
+        },
+        "mineru_parse_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mineru Parse Id"
+        },
+        "paper_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paper Title"
+        },
+        "pmcid": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pmcid"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        }
+      },
+      "required": [
+        "license"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "SourceLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "figure_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Figure Id"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "paragraph_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Index"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "table_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Id"
+        }
+      },
+      "title": "SourceLocation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "agent_tasks": {
+      "items": {
+        "$ref": "#/$defs/AgentTask"
+      },
+      "minItems": 1,
+      "title": "Agent Tasks",
+      "type": "array"
+    },
+    "biological_mechanism": {
+      "$ref": "#/$defs/BiologicalMechanism"
+    },
+    "biophysical_model": {
+      "$ref": "#/$defs/BiophysicalModel"
+    },
+    "bridge_type": {
+      "enum": [
+        "binding_thermodynamics_to_binding_mechanism",
+        "enzyme_kinetics_to_catalytic_mechanism",
+        "folding_stability_thermodynamics_to_mutation_mechanism",
+        "conformational_dynamics_to_allosteric_mechanism",
+        "phase_separation_to_condensate_mechanism",
+        "systems_biology_dynamics_to_pathway_mechanism"
+      ],
+      "title": "Bridge Type",
+      "type": "string"
+    },
+    "case_id": {
+      "minLength": 1,
+      "title": "Case Id",
+      "type": "string"
+    },
+    "dataset_family": {
+      "const": "Biophys-Bridge",
+      "title": "Dataset Family",
+      "type": "string"
+    },
+    "dataset_subtype": {
+      "const": "Sci-Evo",
+      "title": "Dataset Subtype",
+      "type": "string"
+    },
+    "dataset_type": {
+      "const": "Sci-Evo",
+      "title": "Dataset Type",
+      "type": "string"
+    },
+    "domain": {
+      "enum": [
+        "protein_ligand_binding",
+        "enzyme_kinetics",
+        "protein_stability_thermodynamics",
+        "conformational_dynamics_allostery",
+        "biomolecular_phase_separation",
+        "systems_biology_dynamics"
+      ],
+      "title": "Domain",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "expert_annotation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExpertAnnotation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "failure_or_revision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FailureOrRevision"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "hypothesis": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hypothesis"
+    },
+    "methods": {
+      "items": {
+        "$ref": "#/$defs/Method"
+      },
+      "title": "Methods",
+      "type": "array"
+    },
+    "physical_interpretation": {
+      "$ref": "#/$defs/PhysicalInterpretation"
+    },
+    "quality": {
+      "$ref": "#/$defs/Quality"
+    },
+    "quantitative_evidence": {
+      "items": {
+        "$ref": "#/$defs/QuantitativeEvidence"
+      },
+      "title": "Quantitative Evidence",
+      "type": "array"
+    },
+    "research_question": {
+      "title": "Research Question",
+      "type": "string"
+    },
+    "sci_evo_trajectory": {
+      "items": {
+        "$ref": "#/$defs/SciEvoStep"
+      },
+      "title": "Sci Evo Trajectory",
+      "type": "array"
+    },
+    "scientific_object": {
+      "$ref": "#/$defs/ScientificObject"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    }
+  },
+  "required": [
+    "case_id",
+    "dataset_type",
+    "dataset_family",
+    "dataset_subtype",
+    "bridge_type",
+    "domain",
+    "source",
+    "scientific_object",
+    "research_question",
+    "biophysical_model",
+    "physical_interpretation",
+    "biological_mechanism",
+    "agent_tasks"
+  ],
+  "title": "Case",
+  "type": "object"
+}

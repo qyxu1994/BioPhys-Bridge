@@ -1,0 +1,8 @@
+queries:
+  - "protein ligand binding affinity Kd ITC"
+  - "enzyme kinetics kcat Km mutation"
+filters:
+  open_access_only: true
+  require_license: true
+  require_doi_or_pmcid: true
+max_results: 100

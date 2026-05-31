@@ -1,0 +1,19 @@
+metrics:
+  - Kd
+  - Ki
+  - IC50
+  - EC50
+  - kcat
+  - Km
+  - kcat_over_Km
+  - Tm
+  - dG
+  - ddG
+units:
+  concentration: [nM, uM, mM, M]
+  energy: [kcal/mol, kJ/mol]
+  rate: [1/s, 1/min]
+llm:
+  enabled: false
+  provider: openai
+  model: gpt-4o-mini

@@ -1,0 +1,22 @@
+modes:
+  smoke:
+    sample_size: 5
+    output_root: runs
+  dev:
+    sample_size: 30
+    output_root: runs
+  full:
+    output_root: results/aggregate
+    refuse_if_output_exists: true
+    refuse_if_duplicate_case_ids: true
+    require_schema_pass: true
+metrics:
+  - schema_valid_rate
+  - evidence_coverage_rate
+  - quantitative_evidence_rate
+  - unit_normalization_success_rate
+  - source_license_coverage
+  - mineru_artifact_coverage
+  - sci_evo_completeness_score
+  - duplicate_rate
+  - manual_review_pass_rate

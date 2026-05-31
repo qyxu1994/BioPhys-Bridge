@@ -1,0 +1,20 @@
+mode: api          # api | agent | local | dry-run
+api:                # token-based v4 batch API (needs MINERU_API_KEY)
+  base_url: https://mineru.net/api/v4
+  timeout_seconds: 300
+agent:              # token-free Agent lightweight API (IP rate-limited, markdown-only)
+  base_url: https://mineru.net/api/v1/agent
+  timeout_seconds: 300
+  language: en
+  poll_interval_seconds: 3
+local:
+  cli: mineru
+  extra_args: []
+outputs:
+  parsed_dir: data/intermediate/parsed_docs
+artifacts:
+  - markdown
+  - structured_json
+  - tables
+  - formulas
+  - figures

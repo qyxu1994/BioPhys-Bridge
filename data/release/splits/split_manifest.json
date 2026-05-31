@@ -1,0 +1,34 @@
+{
+  "domain_counts_by_split": {
+    "test": {
+      "biomolecular_phase_separation": 5,
+      "conformational_dynamics_allostery": 9,
+      "enzyme_kinetics": 2,
+      "protein_ligand_binding": 19,
+      "protein_stability_thermodynamics": 2,
+      "systems_biology_dynamics": 13
+    },
+    "train": {
+      "biomolecular_phase_separation": 42,
+      "conformational_dynamics_allostery": 73,
+      "enzyme_kinetics": 18,
+      "protein_ligand_binding": 150,
+      "protein_stability_thermodynamics": 17,
+      "systems_biology_dynamics": 100
+    },
+    "validation": {
+      "biomolecular_phase_separation": 5,
+      "conformational_dynamics_allostery": 9,
+      "enzyme_kinetics": 2,
+      "protein_ligand_binding": 19,
+      "protein_stability_thermodynamics": 2,
+      "systems_biology_dynamics": 13
+    }
+  },
+  "split_counts": {
+    "test": 50,
+    "train": 400,
+    "validation": 50
+  },
+  "strategy": "deterministic stratified by domain; case_id-sorted within each domain"
+}

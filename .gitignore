@@ -1,0 +1,94 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local agent / IDE artifacts
+Claude.md
+.claude/
+.cursor/
+.cursor-cache/
+AGENTS.md
+
+# Background
+background/
+
+# Submission
+biophys-bridge-submission-v*/
+
+# Raw source PDFs (large; not redistributable as code)
+sample-papers/
+biophys-papers/
+
+# Implementation / planning artifacts (local-only; submission keeps only
+# functional code and final results)
+implement-plan/
+plan/
+plans/
+EVAL_SUMMARY.md
+SCRATCH.md
+NOTES.md
+TODO.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Logs and intermediate artifacts
+logs/
+runs/
+artifacts/
+tmp/
+cache/
+checkpoints/
+intermediate/
+outputs/raw/
+outputs/mineru_raw/
+outputs/llm_raw/
+
+# Raw data that may be large or license-sensitive
+data/raw/
+data/pdfs/
+data/intermediate/
+data/mineru_raw/
+data/external/
+
+# Keep curated samples and aggregate results
+!data/samples/
+!data/release/
+data/release/*.jsonl
+data/release/splits/*.jsonl
+!data/release/README.md
+!data/release/data_card.md
+!data/release/biophys_bridge_metadata.json
+!data/release/biophys_bridge_schema.json
+!data/release/splits/
+!data/release/splits/split_manifest.json
+!results/
+!results/aggregate/
+!reports/
+
+# Local annotation/review work queues stay on disk but outside the public repo.
+reports/competition_*.md
+reports/expert_annotation_review_queue_*.md
+data/release/expert_annotation_review_queue_*.jsonl
+biophys_bridge_dataset.py
+
+# Intermediate validation reports are reproducibility scratch; keep curated
+# benchmark summaries explicit in the release bundle instead.
+results/aggregate/*validation_report*.json
+results/aggregate/scale500_*.json
+results/aggregate/agent_eval_lexical_baseline_*.json
+!results/aggregate/agent_eval_lexical_retrieval_baseline_500_20260531.json
+!results/aggregate/agent_eval_openai_gpt4o_mini_test_20260531.json
+
+# OS files
+.DS_Store

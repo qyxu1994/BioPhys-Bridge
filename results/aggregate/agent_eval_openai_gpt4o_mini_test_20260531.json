@@ -1,0 +1,30 @@
+{
+  "domain_scores": {
+    "biomolecular_phase_separation": 0.2364633849477694,
+    "conformational_dynamics_allostery": 0.20305300199898876,
+    "enzyme_kinetics": 0.3251205185288372,
+    "protein_ligand_binding": 0.2260378337765072,
+    "protein_stability_thermodynamics": 0.20489492035058537,
+    "systems_biology_dynamics": 0.23684233930849055
+  },
+  "evaluated_this_run": 154,
+  "mean_answer_token_f1": 0.19400573435998555,
+  "mean_evidence_id_f1": 0.31167285095856523,
+  "mean_overall_score": 0.22930586933955943,
+  "model": "gpt-4o-mini",
+  "n_tasks": 154,
+  "provider": "openai",
+  "schema_errors": 0,
+  "task_type_counts": {
+    "derivation": 39,
+    "discrepancy_explanation": 31,
+    "mechanism_from_evidence": 46,
+    "next_experiment_design": 38
+  },
+  "task_type_scores": {
+    "derivation": 0.24929610532295962,
+    "discrepancy_explanation": 0.23123606122577584,
+    "mechanism_from_evidence": 0.2613755532323064,
+    "next_experiment_design": 0.1683937480003049
+  }
+}
