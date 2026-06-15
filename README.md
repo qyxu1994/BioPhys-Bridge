@@ -1,4 +1,4 @@
-# Biophys-Bridge
+<img width="600" height="150" alt="Logo-BioPhys-Bridge" src="https://github.com/user-attachments/assets/ad220aa8-145e-4cb1-9916-2839d09fb6f6" />
 
 **A physics-grounded Sci-Evo dataset for biological mechanism reasoning.**
 
